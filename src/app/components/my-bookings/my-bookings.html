@@ -1,0 +1,40 @@
+<div class="page-wrapper">
+  <nav class="top-nav">
+    <div class="nav-brand">Lab2Door</div>
+    <div class="nav-links">
+      <a routerLink="/tests">Tests</a>
+      <a routerLink="/my-bookings" class="active">My Bookings</a>
+    </div>
+  </nav>
+
+  <div class="content-container">
+    <h2 class="page-title">My Bookings</h2>
+    <p class="page-subtitle">Track and manage your diagnostic test bookings</p>
+
+    <div class="bookings-list" *ngIf="bookings.length > 0">
+      <div class="booking-card" *ngFor="let booking of bookings">
+        <div class="booking-left">
+          <div class="booking-icon">🩺</div>
+          <div>
+            <h3>{{ booking.testName }}</h3>
+            <p class="booking-address">📍 {{ booking.address }}</p>
+            <p class="booking-slot">🕒 {{ booking.slotTime }}</p>
+          </div>
+        </div>
+        <div class="booking-right">
+          <span class="status-badge" [ngClass]="booking.status.toLowerCase()">{{ booking.status }}</span>
+          <span class="booking-price">₹{{ booking.price }}</span>
+          <button *ngIf="booking.status === 'BOOKED'" class="btn-cancel-small" (click)="cancel(booking.id)">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="bookings.length === 0">
+      <div class="empty-icon">📋</div>
+      <p>No bookings yet.</p>
+      <a routerLink="/tests" class="btn-book-link">Browse Tests</a>
+    </div>
+
+    <p *ngIf="message" class="toast-message">{{ message }}</p>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="brand">
+      <h1>Lab2Door</h1>
+      <p>Diagnostic tests, booked at your doorstep</p>
+    </div>
+
+    <h2>Create Account</h2>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" [(ngModel)]="name" name="name" placeholder="Your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="At least 6 characters" required>
+      </div>
+
+      <button type="submit" class="btn-primary">Sign Up</button>
+    </form>
+
+    <p class="error-text" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <p class="switch-link">Already have an account? <a routerLink="/login">Login</a></p>
+  </div>
+</div>

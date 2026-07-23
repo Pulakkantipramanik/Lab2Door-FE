@@ -1,0 +1,46 @@
+<div class="page-wrapper">
+  <nav class="top-nav">
+    <div class="nav-brand">Lab2Door</div>
+    <div class="nav-links">
+      <a routerLink="/tests" class="active">Tests</a>
+      <a routerLink="/my-bookings">My Bookings</a>
+    </div>
+  </nav>
+
+  <div class="content-container">
+    <h2 class="page-title">Available Diagnostic Tests</h2>
+    <p class="page-subtitle">Book a test, we'll collect the sample from your doorstep</p>
+
+    <div class="test-grid">
+      <div class="test-card" *ngFor="let test of tests">
+        <div class="test-icon">🧪</div>
+        <h3>{{ test.name }}</h3>
+        <p class="test-desc">{{ test.description }}</p>
+        <div class="test-meta">
+          <span class="badge">{{ test.sampleType }}</span>
+          <span class="price">₹{{ test.price }}</span>
+        </div>
+        <button class="btn-book" (click)="bookTest(test.id)">Book Now</button>
+      </div>
+    </div>
+
+    <div *ngIf="selectedTestId" class="booking-modal-overlay">
+      <div class="booking-modal">
+        <h3>Confirm Your Booking</h3>
+        <div class="form-group">
+          <label>Preferred Slot</label>
+          <input type="datetime-local" [(ngModel)]="slotTime" name="slotTime">
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" [(ngModel)]="address" name="address" placeholder="Enter your address">
+        </div>
+        <div class="modal-actions">
+          <button class="btn-cancel" (click)="selectedTestId = null">Cancel</button>
+          <button class="btn-book" (click)="confirmBooking()">Confirm Booking</button>
+        </div>
+        <p *ngIf="message" class="modal-message">{{ message }}</p>
+      </div>
+    </div>
+  </div>
+</div>
